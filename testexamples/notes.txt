@@ -1,0 +1,33 @@
+//notes for trustgaurd extensions
+
+//enter_untrusted -> ENTER_UNTRUSTED
+
+//files touched and how
+1) RISCVInstrInfo.td has an include for custom file RISCVInstrInfoTG.td
+2) RISCVInstrInfoTG.td has custom instruction definition and pattern matching support
+the above are located in /home/enemery/llvm-project/llvm/lib/Target/RISCV
+
+3)IntrinsicsRISCV.td has intrinsic definition for llvm intrinsic
+above located in /home/enemery/llvm-project/llvm/include/llvm/IR
+
+4)RISCV.cpp has switch case for matching clang builtin to llvm intrinsic
+/home/enemery/llvm-project/clang/libCodeGen/TargetBuiltins/
+
+5)BuiltinsRISCV.td" has the trustgaurd builtin for clang for enter_untrusted defined
+above is in /llvm-project/clang/include/clang/Basic/
+
+//how to call it
+__builtin_riscv_enter_untrusted();
+
+//how to build it (current version)
+1) to assembly: ~/llvm-project/build/bin/clang -target riscv64 -march=rv64gc -S t.c -o test_enter_untrusted.s
+2) to IR: ~/llvm-project/build/bin/clang -target riscv64 -march=rv64gc -emit-llvm -S t.c -o test_enter_untrusted.ll
+
+
+sources:
+riscv tutorial that actually helped it work: https://github.com/10x-Engineers/clang-builtin-tutorial
+other paper that helped me: https://arxiv.org/pdf/2310.18353v1
+useless bullshit llvm docs: https://llvm.org/docs/ExtendingLLVM.html
+some good stuff in here(slideshow): https://riscv-europe.org/summit/2024/media/Tutorial%20supporting%20custom%20RISC-V%20extensions%20in%20LLVM.pdf
+
+
