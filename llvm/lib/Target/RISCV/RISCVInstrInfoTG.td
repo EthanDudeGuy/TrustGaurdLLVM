@@ -12,7 +12,7 @@ def ENTER_UNTRUSTED :
     let rs1 = 0;
     let imm12 = 0;
     let rd = 0;
-    let isBarrier = 1;
+    let isBarrier = 1; //makes it a memory fence kind of thing, is this enough?
 }
 
 

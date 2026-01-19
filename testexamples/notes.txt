@@ -11,17 +11,22 @@ the above are located in /home/enemery/llvm-project/llvm/lib/Target/RISCV
 above located in /home/enemery/llvm-project/llvm/include/llvm/IR
 
 4)RISCV.cpp has switch case for matching clang builtin to llvm intrinsic
-/home/enemery/llvm-project/clang/libCodeGen/TargetBuiltins/
+/home/enemery/llvm-project/clang/lib/CodeGen/TargetBuiltins/
 
 5)BuiltinsRISCV.td" has the trustgaurd builtin for clang for enter_untrusted defined
 above is in /llvm-project/clang/include/clang/Basic/
 
-//how to call it
+//how to call it in C
 __builtin_riscv_enter_untrusted();
 
 //how to build it (current version)
 1) to assembly: ~/llvm-project/build/bin/clang -target riscv64 -march=rv64gc -S t.c -o test_enter_untrusted.s
 2) to IR: ~/llvm-project/build/bin/clang -target riscv64 -march=rv64gc -emit-llvm -S t.c -o test_enter_untrusted.ll
+3) to .o: ~/llvm-project/build/bin/clang -target riscv64 -march=rv64gc -c test_enter_untrusted.s -o test_enter_untrusted.o
+4) to disassemble: llvm-objdump -d test_enter_untrusted.o
+
+//dumping tablegen results into a file for my enter_untrusted instruction
+~/llvm-project/build/bin/llvm-tblgen   -I ~/llvm-project/llvm/include   -I ~/llvm-project/llvm/lib/Target   -I ~/llvm-project/llvm/lib/Target/RISCV   ~/llvm-project/llvm/lib/Target/RISCV/RISCV.td | grep -A 40 'ENTER_UNTRUSTED' > /home/enemery/llvm-project/testexamples/fulloptions.txt
 
 
 sources:
@@ -30,4 +35,9 @@ other paper that helped me: https://arxiv.org/pdf/2310.18353v1
 useless bullshit llvm docs: https://llvm.org/docs/ExtendingLLVM.html
 some good stuff in here(slideshow): https://riscv-europe.org/summit/2024/media/Tutorial%20supporting%20custom%20RISC-V%20extensions%20in%20LLVM.pdf
 
+next steps:
+ - Formalize into an extension
+ - add other 3 instructions and cooresponding builtins
+ - Inverstigate how to do inlining prevention
+ - explore other tablegen instruction options for compiler optimization behavior
 

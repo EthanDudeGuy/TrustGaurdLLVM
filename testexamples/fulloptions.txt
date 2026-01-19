@@ -1,0 +1,48 @@
+def ENTER_UNTRUSTED {	// InstructionEncoding Instruction RVInstCommon RVInst RVInstIBase RVInstI Sched
+  field bits<32> Inst = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1 };
+  int Size = 4;
+  string DecoderNamespace = "";
+  list<Predicate> Predicates = [];
+  string DecoderMethod = "";
+  bit hasCompleteDecoder = 1;
+  string Namespace = "RISCV";
+  dag OutOperandList = (outs);
+  dag InOperandList = (ins GPR:$rs1, simm12_lsb00000:$imm12);
+  string AsmString = "enter_untrusted";
+  EncodingByHwMode EncodingInfos = ?;
+  list<dag> Pattern = [];
+  list<Register> Uses = [];
+  list<Register> Defs = [];
+  int CodeSize = 0;
+  int AddedComplexity = 0;
+  bit isPreISelOpcode = 0;
+  bit isReturn = 0;
+  bit isBranch = 0;
+  bit isEHScopeReturn = 0;
+  bit isIndirectBranch = 0;
+  bit isCompare = 0;
+  bit isMoveImm = 0;
+  bit isMoveReg = 0;
+  bit isBitcast = 0;
+  bit isSelect = 0;
+  bit isBarrier = 1;
+  bit isCall = 0;
+  bit isAdd = 0;
+  bit isTrap = 0;
+  bit canFoldAsLoad = 0;
+  bit mayLoad = ?;
+  bit mayStore = ?;
+  bit mayRaiseFPException = 0;
+  bit isConvertibleToThreeAddress = 0;
+  bit isCommutable = 0;
+  bit isTerminator = 0;
+  bit isReMaterializable = 0;
+  bit isPredicable = 0;
+  bit isUnpredicable = 0;
+--
+  list<dag> ResultInstrs = [(ENTER_UNTRUSTED (XLenVT 0), 0)];
+  list<Predicate> Predicates = [];
+  int AddedComplexity = 0;
+  bit GISelShouldIgnore = 0;
+}
+

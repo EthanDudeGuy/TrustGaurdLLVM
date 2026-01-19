@@ -156,6 +156,7 @@ def pause : RISCVBuiltin<"void()">;
 //===----------------------------------------------------------------------===//
 //Trustgaurd extension
 //-------------------------------------------------------------------------===//
+//here's where we need to make this beholden to a custom extension (features field)
 let Attributes = [NoThrow] in
 def enter_untrusted : RISCVBuiltin<"void()">;
 

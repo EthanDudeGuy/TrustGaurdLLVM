@@ -1961,10 +1961,11 @@ def int_riscv_pause : DefaultAttrsIntrinsic<[], [], [IntrNoMem, IntrHasSideEffec
 // Vendor extensions
 
 //TrustGaurd extensions
+//For now it is here, but need to create a dedicated file to
+//hold the "vendor extension" part of it so we can activate with command line option
 //===----------------------------------------------------------------------===//
 let TargetPrefix = "riscv" in
 def int_riscv_enter_untrusted : DefaultAttrsIntrinsic<[], [], [IntrNoMem, IntrHasSideEffects]>;
-
 
 
 //===----------------------------------------------------------------------===//
