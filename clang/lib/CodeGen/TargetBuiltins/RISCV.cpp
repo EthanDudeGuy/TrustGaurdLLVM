@@ -1303,6 +1303,11 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
     ID = Intrinsic::riscv_enter_untrusted;
     break;
 
+  //TrustGaurd exit_untrusted
+  case RISCV::BI__builtin_riscv_exit_untrusted:
+    ID = Intrinsic::riscv_exit_untrusted;
+    break;
+
   // XCValu
   case RISCV::BI__builtin_riscv_cv_alu_addN:
     ID = Intrinsic::riscv_cv_alu_addN;

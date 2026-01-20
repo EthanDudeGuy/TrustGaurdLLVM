@@ -160,6 +160,9 @@ def pause : RISCVBuiltin<"void()">;
 let Attributes = [NoThrow] in
 def enter_untrusted : RISCVBuiltin<"void()">;
 
+let Attributes = [NoThrow] in
+def exit_untrusted : RISCVBuiltin<"void()">;
+
 //===----------------------------------------------------------------------===//
 // XCV extensions.
 //===----------------------------------------------------------------------===//

@@ -14,6 +14,7 @@ main:                                   # @main
 	li	a0, 0
 	sw	a0, -20(s0)
 	enter_untrusted
+	exit_untrusted
 	ld	ra, 24(sp)                      # 8-byte Folded Reload
 	ld	s0, 16(sp)                      # 8-byte Folded Reload
 	addi	sp, sp, 32
@@ -21,6 +22,6 @@ main:                                   # @main
 .Lfunc_end0:
 	.size	main, .Lfunc_end0-main
                                         # -- End function
-	.ident	"clang version 22.0.0git (https://github.com/EthanDudeGuy/TrustGaurdLLVM.git 0b5c386e2af1e1fb5dda9ff7e3a0a9073f60c3c7)"
+	.ident	"clang version 22.0.0git (https://github.com/EthanDudeGuy/TrustGaurdLLVM.git d3e59c977c2dea10232681671740d70b28416254)"
 	.section	".note.GNU-stack","",@progbits
 	.addrsig

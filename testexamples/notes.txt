@@ -6,6 +6,7 @@
 1) RISCVInstrInfo.td has an include for custom file RISCVInstrInfoTG.td
 2) RISCVInstrInfoTG.td has custom instruction definition and pattern matching support
 the above are located in /home/enemery/llvm-project/llvm/lib/Target/RISCV
+3) RISCVInstrInfoTG2.td has exit untrusted in it, for some reason must be a seperately included file
 
 3)IntrinsicsRISCV.td has intrinsic definition for llvm intrinsic
 above located in /home/enemery/llvm-project/llvm/include/llvm/IR

@@ -1,8 +1,8 @@
 //Tablegen file for custom TRUSTGAURD instructions
 
 //ENTER_UNTRUSTED takes no args and returns nothing
-//It is implemented as RISCV custom instruction CUSTOM0
-//TODO: clean it up so It is truley modeled as a zero operand instruction instead of faking it
+//It is implemented as RISCV custom instruction opcode CUSTOM0 with funct3 as 0b010
+
 def ENTER_UNTRUSTED :
   RVInstI<0b010, OPC_CUSTOM_0,
           (outs),
@@ -15,9 +15,9 @@ def ENTER_UNTRUSTED :
     let isBarrier = 1; //makes it a memory fence kind of thing, is this enough?
 }
 
-
 //Pattern matching for ENTER_UNTRUSTED
 //Allows the DAG to match the intrinsic and lower to this new instruction
 def : Pat<(int_riscv_enter_untrusted), (ENTER_UNTRUSTED (XLenVT 0), 0)>;
+
 
 
