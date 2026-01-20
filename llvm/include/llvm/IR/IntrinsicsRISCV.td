@@ -1971,6 +1971,9 @@ def int_riscv_enter_untrusted : DefaultAttrsIntrinsic<[], [], [IntrNoMem, IntrHa
 let TargetPrefix = "riscv" in
 def int_riscv_exit_untrusted : DefaultAttrsIntrinsic<[], [], [IntrNoMem, IntrHasSideEffects]>;
 
+let TargetPrefix = "riscv" in
+def int_riscv_put_sentry : DefaultAttrsIntrinsic<[], [llvm_i64_ty], [IntrNoMem, IntrHasSideEffects, IntrNoDuplicate, IntrConvergent]>;
+
 //end Trustgaurd additions
 //===----------------------------------------------------------------------===//
 
