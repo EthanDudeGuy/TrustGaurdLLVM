@@ -38,4 +38,4 @@ attributes #2 = { convergent nocallback noduplicate nofree nosync nounwind willr
 !3 = !{!"rv64i2p1_m2p0_a2p1_f2p2_d2p2_c2p0_zicsr2p0_zifencei2p0_zmmul1p0_zaamo1p0_zalrsc1p0_zca1p0_zcd1p0"}
 !4 = !{i32 7, !"frame-pointer", i32 2}
 !5 = !{i32 8, !"SmallDataLimit", i32 0}
-!6 = !{!"clang version 22.0.0git (https://github.com/EthanDudeGuy/TrustGaurdLLVM.git bc5861cf7918d7f4d753a4c4a83005c6623a8a7f)"}
+!6 = !{!"clang version 22.0.0git (https://github.com/EthanDudeGuy/TrustGaurdLLVM.git 1a9b61b0698da73f1f049402407f59c54a45b7db)"}

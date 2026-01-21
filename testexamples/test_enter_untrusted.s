@@ -27,6 +27,6 @@ main:                                   # @main
 .Lfunc_end0:
 	.size	main, .Lfunc_end0-main
                                         # -- End function
-	.ident	"clang version 22.0.0git (https://github.com/EthanDudeGuy/TrustGaurdLLVM.git bc5861cf7918d7f4d753a4c4a83005c6623a8a7f)"
+	.ident	"clang version 22.0.0git (https://github.com/EthanDudeGuy/TrustGaurdLLVM.git 1a9b61b0698da73f1f049402407f59c54a45b7db)"
 	.section	".note.GNU-stack","",@progbits
 	.addrsig

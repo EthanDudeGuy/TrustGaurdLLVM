@@ -1,10 +1,10 @@
 //Tablegen file for custom TRUSTGAURD instructions
 
 //PUT takes no args and returns nothing
-//It is implemented as RISCV custom instruction opcode CUSTOM0 with funct3 as 0b001
+//It is implemented as RISCV custom instruction opcode CUSTOM0 with funct3 as 0b011
 
 def PUT_SENTRY :
-  RVInstI<0b001, OPC_CUSTOM_0,
+  RVInstI<0b011, OPC_CUSTOM_0,
           (outs),
           (ins GPR:$rs1, simm12_lsb00000:$imm12),
           "put_sentry $rs1", "">,
