@@ -166,6 +166,13 @@ def exit_untrusted : RISCVBuiltin<"void()">;
 let Attributes = [NoThrow] in
 def put_sentry : RISCVBuiltin<"void(unsigned long int)">;
 
+let Attributes = [NoThrow] in
+def get_sentry : RISCVBuiltin<"unsigned long int()">;
+
+let Attributes = [NoThrow] in
+def alert_sentry : RISCVBuiltin<"void()">;
+
+
 //===----------------------------------------------------------------------===//
 // XCV extensions.
 //===----------------------------------------------------------------------===//

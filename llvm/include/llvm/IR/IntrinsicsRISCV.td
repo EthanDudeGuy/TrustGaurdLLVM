@@ -1972,7 +1972,14 @@ let TargetPrefix = "riscv" in
 def int_riscv_exit_untrusted : DefaultAttrsIntrinsic<[], [], [IntrNoMem, IntrHasSideEffects]>;
 
 let TargetPrefix = "riscv" in
-def int_riscv_put_sentry : DefaultAttrsIntrinsic<[], [llvm_i64_ty], [IntrNoMem, IntrHasSideEffects, IntrNoDuplicate, IntrConvergent]>;
+def int_riscv_put_sentry : DefaultAttrsIntrinsic<[], [llvm_ptr_ty], [IntrNoMem, IntrHasSideEffects, IntrNoDuplicate, IntrConvergent]>;
+
+let TargetPrefix = "riscv" in
+def int_riscv_get_sentry : DefaultAttrsIntrinsic<[llvm_ptr_ty], [], [IntrHasSideEffects, IntrNoDuplicate, IntrConvergent]>;
+
+let TargetPrefix = "riscv" in
+def int_riscv_alert_sentry : DefaultAttrsIntrinsic<[], [], [IntrNoMem, IntrHasSideEffects]>;
+
 
 //end Trustgaurd additions
 //===----------------------------------------------------------------------===//

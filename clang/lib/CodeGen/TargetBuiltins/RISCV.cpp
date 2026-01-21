@@ -1313,6 +1313,18 @@ Value *CodeGenFunction::EmitRISCVBuiltinExpr(unsigned BuiltinID,
     ID = Intrinsic::riscv_put_sentry;
     break;
 
+  //TrustGaurd get
+  case RISCV::BI__builtin_riscv_get_sentry:
+    ID = Intrinsic::riscv_get_sentry;
+    break;
+
+  //TrustGaurd alert
+  case RISCV::BI__builtin_riscv_alert_sentry:
+    ID = Intrinsic::riscv_alert_sentry;
+    break;
+
+
+
 
   // XCValu
   case RISCV::BI__builtin_riscv_cv_alu_addN:

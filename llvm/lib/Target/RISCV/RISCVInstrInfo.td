@@ -2387,6 +2387,8 @@ include "RISCVInstrInfoXSpacemiT.td"
 include "RISCVInstrInfoEnterUntrusted.td"
 include "RISCVInstrInfoExitUntrusted.td"
 include "RISCVInstrInfoPut.td"
+include "RISCVInstrInfoGet.td"
+include "RISCVInstrInfoAlert.td"
 
 //===----------------------------------------------------------------------===//
 // Global ISel
