@@ -1,9 +1,7 @@
-unsigned int n = 999999990;
-
-
 
 int main(int argc, char** argv) {    
     unsigned long long result = 1;
+    unsigned int n = 6;
     
     if (n == 0 || n == 1) {
         return 1;
