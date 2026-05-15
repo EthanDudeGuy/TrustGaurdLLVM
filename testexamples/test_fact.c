@@ -1,7 +1,5 @@
 unsigned int n = 999999990;
 
-
-
 int main(int argc, char** argv) {    
     unsigned long long result = 1;
     
