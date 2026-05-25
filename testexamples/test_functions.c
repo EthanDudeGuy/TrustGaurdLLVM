@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-long long int global = 2;
+long long int global = 99999999;
 
 int addemup(int x, int y) {
 	return x + y;
 }
 
-int factorial(int n) {
+int TGtrusted_factorial(int n) {
     unsigned long long result = 1;
 
     if (n == 0 || n == 1) {
@@ -25,7 +25,7 @@ int main() {
 	volatile int x = 1;
 	volatile int y = 2;
 	int result = addemup(x, global);
-	int fact_result = factorial(result);
+	int fact_result = TGtrusted_factorial(result);
 	printf("the result was %d\n", fact_result);
 	return fact_result;
 }

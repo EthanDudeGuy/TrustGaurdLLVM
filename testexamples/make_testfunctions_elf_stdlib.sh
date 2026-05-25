@@ -6,12 +6,13 @@ SYSROOT_LIB=/usr/riscv64-linux-gnu/lib
  --target=riscv64-unknown-linux-gnu \
  --sysroot=/usr/riscv64-linux-gnu \
  --gcc-toolchain=/usr \
- -march=rv64imafdv \
+ -march=rv64imafd \
  -mno-relax \
  -fuse-ld=lld \
+ -Wl,--no-relax \
  -nodefaultlibs \
  -L"$GCC_PATH" \
  -L"$SYSROOT_LIB" \
  -Wl,--entry,main \
- test_functions.c -o test_functions.elf \
+ test_functions.c -O2 -o test_functions.elf \
  -l:libc.so.6 -lgcc -l:libgcc_s.so.1
