@@ -27,6 +27,11 @@
 #include "llvm/Support/SaveAndRestore.h"
 #include <optional>
 #include <stack>
+#include <string>
+#include "llvm/ADT/StringSet.h"
+
+//dirty hacky global for TG pragma parser
+extern llvm::StringSet<> TrustedFunctions;
 
 namespace clang {
 class PragmaHandler;
@@ -193,6 +198,11 @@ class Parser : public CodeCompletionHandler {
   ///@{
 
 public:
+
+  //Added for TG Parser flag (recognize functions with pragma trusted)  
+  bool NextFunctionTrusted = false;
+  llvm::SmallVector<std::string, 16> TrustedFunctionNames;
+
   friend class ColonProtectionRAIIObject;
   friend class PoisonSEHIdentifiersRAIIObject;
   friend class ParenBraceBracketBalancer;
@@ -7002,6 +7012,9 @@ private:
   std::unique_ptr<PragmaHandler> AlignHandler;
   std::unique_ptr<PragmaHandler> GCCVisibilityHandler;
   std::unique_ptr<PragmaHandler> OptionsHandler;
+  //added for TG -----
+  std::unique_ptr<PragmaHandler> TrustedHandler;
+  //added for TG ^^^^^
   std::unique_ptr<PragmaHandler> PackHandler;
   std::unique_ptr<PragmaHandler> MSStructHandler;
   std::unique_ptr<PragmaHandler> UnusedHandler;

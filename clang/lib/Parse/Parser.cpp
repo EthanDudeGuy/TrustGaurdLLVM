@@ -28,6 +28,8 @@
 #include "llvm/Support/TimeProfiler.h"
 using namespace clang;
 
+//dirty hacky global set for TG pragma functionality
+llvm::StringSet<> TrustedFunctions;
 
 namespace {
 /// A comment handler that passes comments found by the preprocessor
@@ -1420,6 +1422,26 @@ Decl *Parser::ParseFunctionDefinition(ParsingDeclarator &D,
   if (LateParsedAttrs)
     ParseLexedAttributeList(*LateParsedAttrs, Res, /*EnterScope=*/false,
                             /*OnDefinition=*/true);
+
+  //added for TG pragma parsing
+  if (NextFunctionTrusted) {
+    if (auto *FD = dyn_cast_or_null<FunctionDecl>(Res)) {
+      std::string Name = FD->getNameAsString();
+
+      llvm::errs() << "recording trusted function: "
+                   << Name
+                   << "\n";
+  
+      TrustedFunctions.insert(Name);
+    } else {
+      llvm::errs() << "#pragma trusted did not attach to a FunctionDecl\n";
+    }
+  
+    NextFunctionTrusted = false;
+  }  
+  
+  
+  
 
   if (SkipFunctionBodies && (!Res || Actions.canSkipFunctionBody(Res)) &&
       trySkippingFunctionBody()) {

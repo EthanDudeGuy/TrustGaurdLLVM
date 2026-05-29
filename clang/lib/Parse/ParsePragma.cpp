@@ -26,6 +26,7 @@
 #include "clang/Sema/SemaRISCV.h"
 #include "llvm/ADT/ArrayRef.h"
 #include "llvm/ADT/StringSwitch.h"
+#include "llvm/Support/raw_ostream.h"
 #include <optional>
 using namespace clang;
 
@@ -47,6 +48,21 @@ struct PragmaOptionsHandler : public PragmaHandler {
   explicit PragmaOptionsHandler() : PragmaHandler("options") {}
   void HandlePragma(Preprocessor &PP, PragmaIntroducer Introducer,
                     Token &FirstToken) override;
+};
+
+//TG pragem handler
+struct PragmaTrustedHandler : public PragmaHandler {
+  Parser &P;
+
+  PragmaTrustedHandler(Parser &P)
+      : PragmaHandler("trusted"), P(P) {}
+
+  void HandlePragma(Preprocessor &PP,
+                    PragmaIntroducer Introducer,
+                    Token &FirstToken) override {
+    llvm::errs() << "saw #pragma trusted\n";
+    P.NextFunctionTrusted = true;
+  }
 };
 
 struct PragmaPackHandler : public PragmaHandler {
@@ -401,6 +417,7 @@ struct PragmaRISCVHandler : public PragmaHandler {
   void HandlePragma(Preprocessor &PP, PragmaIntroducer Introducer,
                     Token &FirstToken) override;
 
+
 private:
   Sema &Actions;
 };
@@ -420,6 +437,11 @@ void Parser::initializePragmaHandlers() {
 
   OptionsHandler = std::make_unique<PragmaOptionsHandler>();
   PP.AddPragmaHandler(OptionsHandler.get());
+
+  //added for TG ----
+  TrustedHandler = std::make_unique<PragmaTrustedHandler>(*this);
+  PP.AddPragmaHandler(TrustedHandler.get());
+  //added for TG ^^^^
 
   PackHandler = std::make_unique<PragmaPackHandler>();
   PP.AddPragmaHandler(PackHandler.get());

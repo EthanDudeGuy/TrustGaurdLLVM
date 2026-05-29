@@ -74,6 +74,10 @@
 #include "llvm/Transforms/Utils/BuildLibCalls.h"
 #include <optional>
 #include <set>
+#include "llvm/ADT/StringSet.h"
+#include "clang/Parse/Parser.h"
+
+
 
 using namespace clang;
 using namespace CodeGen;
@@ -4979,6 +4983,9 @@ llvm::Constant *CodeGenModule::GetOrCreateLLVMFunction(
   const Decl *D = GD.getDecl();
 
   std::string NameWithoutMultiVersionMangling;
+  //added for TG
+  std::string TrustedMangledNameStorage;
+  //----
   if (const FunctionDecl *FD = cast_or_null<FunctionDecl>(D)) {
     // For the device mark the function as one that should be emitted.
     if (getLangOpts().OpenMPIsTargetDevice && OpenMPRuntime &&
@@ -5017,6 +5024,21 @@ llvm::Constant *CodeGenModule::GetOrCreateLLVMFunction(
 
   if (!NameWithoutMultiVersionMangling.empty())
     MangledName = NameWithoutMultiVersionMangling;
+
+  //TG pragma handling stuff
+  if (const FunctionDecl *FD = cast_or_null<FunctionDecl>(D)) {
+    std::string PlainName = FD->getNameAsString();
+
+    if (TrustedFunctions.count(PlainName)) {
+      TrustedMangledNameStorage = ("TGtrusted." + MangledName).str();
+
+      llvm::errs() << "renaming trusted function: "
+                   << MangledName << " -> "
+                   << TrustedMangledNameStorage << "\n";
+
+      MangledName = TrustedMangledNameStorage;
+    }
+  }
 
   // Lookup the entry, lazily creating it if necessary.
   llvm::GlobalValue *Entry = GetGlobalValue(MangledName);
