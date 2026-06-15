@@ -1,13 +1,13 @@
 #include <stdio.h>
 
-long long int global = 9999999;
+long long int global = 999999999;
 //long long int global = 2;
 
-#pragma trusted
 int addemup(int x, int y) {
 	return x + y;
 }
 
+//#pragma trusted
 long long int factorial(int n) {
     unsigned long long result = 1;
 
