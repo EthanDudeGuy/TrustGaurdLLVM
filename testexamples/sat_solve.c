@@ -1,6 +1,8 @@
 #include <stdio.h>
 
-#define REPEATS 20000
+#define REPEATS 2000
+
+volatile int guard = 0;
 
 #pragma trusted
 int formula_satisfied(
@@ -26,7 +28,7 @@ int formula_satisfied(
 }
 
 #pragma trusted
-int solve_sat(void) {
+int solve_sat(int salt) {
     int x1, x2, x3, x4;
     int x5, x6, x7, x8;
     int x9, x10, x11, x12;
@@ -57,7 +59,8 @@ int solve_sat(void) {
             return x1 + x2 + x3 + x4 +
                    x5 + x6 + x7 + x8 +
                    x9 + x10 + x11 + x12 +
-                   x13 + x14 + x15 + x16;
+                   x13 + x14 + x15 + x16 +
+                   (salt & 0);
         }
     }
 
@@ -69,10 +72,12 @@ int main(void) {
     int result = 0;
 
     for (int i = 0; i < REPEATS; i++) {
-        result = solve_sat();
-        checksum = checksum + result;
+        guard = i;
+        result = solve_sat(guard);
+        checksum += result;
     }
 
     printf("result=%d checksum=%d\n", result, checksum);
+
     return 0;
 }

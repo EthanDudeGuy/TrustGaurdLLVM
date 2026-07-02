@@ -11,7 +11,7 @@ def GET_SENTRY :
   Sched<[]>{
     let rs1 = 0;
     let imm12 = 0;
-    let rd = 0;
+    //let rd = 0;
 }
 
 //Pattern matching for GET_SENTRY
